@@ -1,0 +1,8 @@
+/* src/styles/tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-primary {
+  @apply bg-black/50 text-white px-12 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 hover:shadow-lg;
+}
