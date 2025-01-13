@@ -1,0 +1,40 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.stars div {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite;
+}
+
+.star-1 { top: 20%; left: 15%; animation-delay: 0s; }
+.star-2 { top: 30%; right: 25%; animation-delay: 0.5s; }
+.star-3 { top: 60%; left: 45%; animation-delay: 1s; }
+
+.clouds div {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  animation: float 6s infinite ease-in-out;
+}
+
+.cloud-1 { top: 15%; left: 10%; animation-delay: 0s; }
+.cloud-2 { top: 45%; right: 15%; animation-delay: 2s; }
+.cloud-3 { bottom: 20%; left: 30%; animation-delay: 4s; }
