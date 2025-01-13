@@ -1,17 +1,12 @@
-import React, {useState} from 'react';
-import Navbar from '../components/Navbar';
-import Stars from '../components/Stars';
-import Clouds from '../components/Clouds';
-import '../styles/LoginButton.css'
-import Layout from '../layouts/Layout';
-import PreLoginScreen from './PreLoginScreen';
-import PostLoginScreen from './PostLoginScreen';
+import React, { useState } from "react";
+import "../styles/LoginButton.css";
+import Layout from "../layouts/Layout";
+import PreLoginScreen from "./PreLoginScreen";
+import PostLoginScreen from "./PostLoginScreen";
+import { ThemeProvider, useTheme } from "../contexts/ThemeContext.jsx";
 
 function HomePage() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = () => {
@@ -19,7 +14,7 @@ function HomePage() {
   };
   const handleLogout = () => {
     setIsLoggedIn(false);
-  }
+  };
 
   return (
     <Layout isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}>
