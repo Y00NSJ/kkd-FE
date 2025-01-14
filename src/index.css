@@ -25,8 +25,8 @@
 
 .stars div {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 4px;
+  height: 4px;
   background: white;
   border-radius: 50%;
   animation: twinkle 2s infinite;
