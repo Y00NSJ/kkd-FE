@@ -185,11 +185,12 @@
 
 .clouds div {
   position: absolute;
-  width: 100px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.2);
-
-  border-radius: 20px;
+  width: 250px;
+  height: 110px;
+  background-image: url("/src/assets/cloud.svg"); /* SVG 파일 경로 */
+  background-repeat: no-repeat;
+  background-size: contain; /* SVG 크기를 컨테이너에 맞게 조정 */
+  background-position: center; /* SVG를 컨테이너 중앙에 위치 */
   animation: float 6s infinite ease-in-out;
 }
 
