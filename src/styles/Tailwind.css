@@ -6,3 +6,25 @@
 .btn-primary {
   @apply bg-black/50 text-white px-12 py-4 rounded-full text-xl font-bold transition-all transform hover:scale-105 hover:shadow-lg;
 }
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+    top: -30%;
+  }
+  50% {
+    top: -50%;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+    top: -80%;
+  }
+}
+
+.dark-text {
+  @apply text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.6)];
+}
+
+.light-text {
+  @apply text-gray-900;
+}

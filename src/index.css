@@ -209,3 +209,8 @@
   left: 30%;
   animation-delay: 4s;
 }
+
+.laptop iframe {
+  border: none;
+  border-radius: 5px;
+}
