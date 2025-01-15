@@ -1,14 +1,11 @@
+// Import 섹션
 import { ThemeProvider, useTheme } from "../contexts/ThemeContext.jsx";
 import { Canvas } from "@react-three/fiber";
 import Layout from "../layouts/Layout";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { OrbitControls } from "@react-three/drei";
-import { useGLTF } from "@react-three/drei";
-import { useRef, useEffect } from "react";
-import { useState } from "react";
+import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
 import { Color } from "three";
-import { Environment } from "@react-three/drei";
 
 // 그룹 정의
 const groups = {
@@ -33,20 +30,16 @@ const groups = {
   ],
 };
 
+// GirlModel 컴포넌트 (변경 없음)
 const GirlModel = (props) => {
-  // GLTF 파일 로드 (파일명이 정확한지 확인하세요)
-  const gltf = useGLTF("/girl/scene.gltf"); // 파일명이 'scene.gltf'인지 확인
-
-  // 호버 및 액티브 상태 관리
+  const gltf = useGLTF("/girl/scene.gltf"); // GLTF 파일 로드
   const [hovered, setHovered] = useState(false);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    // 메쉬의 재질을 클론하여 다른 객체에 영향을 주지 않도록 함
     gltf.scene.traverse((child) => {
       if (child.isMesh) {
         child.material = child.material.clone();
-        // 원래 위치 저장
         if (!child.userData.originalPosition) {
           child.userData.originalPosition = child.position.clone();
         }
@@ -55,23 +48,19 @@ const GirlModel = (props) => {
   }, [gltf]);
 
   useEffect(() => {
-    // 호버 및 액티브 상태에 따라 재질 및 위치 변경
     gltf.scene.traverse((child) => {
       if (child.isMesh) {
         if (hovered) {
-          // 호버 시 발광 색상 및 위치 변경
-          child.material.emissive = new Color(0x444444); // 발광 색상
-          child.material.emissiveIntensity = 1; // 발광 강도
-          child.position.y = child.userData.originalPosition.y + 0.1; // 약간 위로 이동
+          child.material.emissive = new Color(0x444444);
+          child.material.emissiveIntensity = 1;
+          child.position.y = child.userData.originalPosition.y + 0.1;
         } else if (active) {
-          // 클릭(액티브) 시 발광 색상 및 위치 변경
-          child.material.emissive = new Color(0x888888); // 다른 발광 색상
-          child.material.emissiveIntensity = 0.5; // 다른 발광 강도
-          child.position.y = child.userData.originalPosition.y - 0.05; // 약간 아래로 이동
+          child.material.emissive = new Color(0x888888);
+          child.material.emissiveIntensity = 0.5;
+          child.position.y = child.userData.originalPosition.y - 0.05;
         } else {
-          // 기본 상태 시 발광 초기화 및 원래 위치 복원
-          child.material.emissive = new Color(0x000000); // 발광 색상 초기화
-          child.material.emissiveIntensity = 0; // 발광 강도 초기화
+          child.material.emissive = new Color(0x000000);
+          child.material.emissiveIntensity = 0;
           child.position.y = child.userData.originalPosition
             ? child.userData.originalPosition.y
             : child.position.y;
@@ -81,10 +70,9 @@ const GirlModel = (props) => {
     });
   }, [hovered, active, gltf]);
 
-  // 클릭 이벤트 핸들러
   const handleClick = (e) => {
-    e.stopPropagation(); // 이벤트 전파 방지
-    setActive(!active); // 활성 상태 토글
+    e.stopPropagation();
+    setActive(!active);
     console.log("Girl model clicked!");
     // 추가적인 액션을 여기에 구현할 수 있습니다.
   };
@@ -94,11 +82,11 @@ const GirlModel = (props) => {
       object={gltf.scene}
       {...props}
       onPointerOver={(e) => {
-        e.stopPropagation(); // 이벤트 전파 방지
+        e.stopPropagation();
         setHovered(true);
       }}
       onPointerOut={(e) => {
-        e.stopPropagation(); // 이벤트 전파 방지
+        e.stopPropagation();
         setHovered(false);
       }}
       onClick={handleClick}
@@ -106,11 +94,13 @@ const GirlModel = (props) => {
   );
 };
 
+// 수정된 Model 컴포넌트
 const Model = () => {
+  const navigate = useNavigate(); // useNavigate를 컴포넌트 내부에서 호출
   const gltf = useGLTF("/models/scene.gltf"); // GLTF 파일 로드
   const groupRefs = useRef({});
 
-  // 호버 상태를 관리하는 state (현재 호버 중인 그룹 이름)
+  // 호버 상태를 관리하는 state
   const [hoveredGroup, setHoveredGroup] = useState(null);
   const [activeGroup, setActiveGroup] = useState(null);
 
@@ -151,15 +141,12 @@ const Model = () => {
       meshes.forEach((mesh) => {
         if (hoveredGroup === groupName) {
           // 밝게 빛나도록 emissive 설정
-          mesh.material.emissive = new Color(0xffffff); // 밝은 녹색 발광 설정
+          mesh.material.emissive = new Color(0xffffff); // 밝은 발광 설정
           mesh.material.emissiveIntensity = 1;
           mesh.position.z = mesh.userData.originalPosition.z + 0.3; // 위로 이동
-        } // 액티브 상태일 때
-        else if (activeGroup === groupName) {
+        } else if (activeGroup === groupName) {
           mesh.position.z = mesh.userData.originalPosition.z - 0.1; // 약간 아래로 이동
-        }
-        // 기본 상태일 때
-        else {
+        } else {
           mesh.material.emissive = new Color(0x000000); // 발광 색상 초기화
           mesh.material.emissiveIntensity = 0;
           mesh.position.z = mesh.userData.originalPosition.z; // 원래 위치로 복원
@@ -169,14 +156,16 @@ const Model = () => {
     }
   }, [hoveredGroup, activeGroup]);
 
-  // 클릭 이벤트 핸들러
+  // 클릭 이벤트 핸들러 수정
   const handleClick = (event) => {
     const clickedObjectName = event.object.name;
 
-    // 특정 객체 클릭 무시 (예: Room)
+    // 특정 객체 클릭 무시 (예: Poster는 이미 처리됨)
     if (groups.Poster.includes(clickedObjectName)) {
       console.log(`Clicked object: ${clickedObjectName} (Group: Poster)`);
-      setActiveGroup("Poster");
+      setTimeout(() => {
+        navigate("/dreams/write/"); // 2초 딜레이 후 페이지 이동
+      }, 2000);
       return;
     }
 
@@ -186,13 +175,33 @@ const Model = () => {
         console.log(
           `Clicked object: ${clickedObjectName} (Group: ${groupName})`
         );
-        setActiveGroup(groupName);
+        // 그룹에 따라 페이지 이동
+        switch (groupName) {
+          case "Bed":
+            navigate("/dreams/view/");
+            break;
+          case "Cupboard":
+            navigate("/dreams/list/");
+            break;
+          case "DrawerChest":
+            navigate("/friends/list/");
+            break;
+          case "Lamp":
+            navigate("/dreams/write/"); // 필요 시 수정
+            break;
+          case "Rug":
+            navigate("/dreams/view/"); // 필요 시 수정
+            break;
+          default:
+            console.log("No page associated with this group.");
+            break;
+        }
         break;
       }
     }
   };
 
-  // 클릭 종료 시 액티브 상태 리셋
+  // 클릭 종료 시 액티브 상태 리셋 (필요 시 유지)
   const handlePointerUp = (event) => {
     setActiveGroup(null);
   };
@@ -233,6 +242,7 @@ const Model = () => {
   );
 };
 
+// PostLoginScreen 컴포넌트
 const PostLoginScreen = ({ onLogout }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -240,17 +250,17 @@ const PostLoginScreen = ({ onLogout }) => {
   return (
     <Layout isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}>
       <div className="flex items-center justify-center min-h-screen">
-        {/* DreamCreate Button */}
-
+        {/* 3D Canvas */}
         <div className="canvas-container">
           <Canvas camera={{ position: [35, 10, 10], fov: 70 }}>
             <OrbitControls target={[23, 3, -7]} />
             <Environment files="/hdri/venice_sunset_1k.hdr" />
-            <Model />
+            <Model /> {/* 수정된 Model 컴포넌트 사용 */}
             <GirlModel position={[27, -10, -20]} scale={3} />
           </Canvas>
         </div>
-        <button
+        {/* Dream Create Button */}
+        {/* <button
           onClick={() => {
             console.log("이동");
             navigate("/dreams/create/");
@@ -258,7 +268,7 @@ const PostLoginScreen = ({ onLogout }) => {
           className="btn-primary"
         >
           Dream Create
-        </button>
+        </button> */}
         {/* Logout Button */}
         <button
           onClick={onLogout}

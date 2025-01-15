@@ -16,20 +16,15 @@ export default function Laptop() {
         <primitive object={laptop.scene} position-y={-1.2}>
           <Html
             wrapperClass="laptop"
-            position={[-0.03, 1.3, -1.4]}
+            position={[-0.03, 1.1, -1.4]}
             transform
             distanceFactor={4.0}
             rotation-x={-0.25}
           >
-            <iframe
-              width={280}
-              height={190}
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <video width={280} height={190} controls muted playsInline autoPlay>
+              <source src="/videos/Sample.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </Html>
         </primitive>
       </PresentationControls>
