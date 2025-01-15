@@ -2,17 +2,21 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import SignupForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
+import { login } from "../api/auth";
 
 const PreLoginScreen = ({ onLogin, backgroundClass }) => {
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-  const handleLogin = (success) => {
-    if (success) {
-      setIsLoginOpen(false); // 모달 닫기
-      onLogin(); // 부모(HomePage)에서 로그인 상태 처리
-    } else {
-      alert("Login failed! Please try again.");
+  const handleLogin = async (username, password) => {
+    try {
+      const data = await login(username, password); // Django 로그인 API 호출
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+      setIsLoginOpen(false); // 로그인 성공 후 모달 닫기
+      onLogin(); // 부모(HomePage)에서 로그인 상태 업데이트
+    } catch (error) {
+      alert("아이디와 비밀번호를 확인하세요.");
     }
   };
 
