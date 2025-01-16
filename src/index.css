@@ -1,40 +1,226 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .stars div {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 4px;
+  height: 4px;
   background: white;
   border-radius: 50%;
   animation: twinkle 2s infinite;
 }
 
-.star-1 { top: 20%; left: 15%; animation-delay: 0s; }
-.star-2 { top: 30%; right: 25%; animation-delay: 0.5s; }
-.star-3 { top: 60%; left: 45%; animation-delay: 1s; }
+.star-1 {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+}
+.star-2 {
+  top: 30%;
+  right: 25%;
+  animation-delay: 0.5s;
+}
+.star-3 {
+  top: 60%;
+  left: 45%;
+  animation-delay: 1s;
+}
+.star-4 {
+  top: 81.77%;
+  left: 27.82%;
+  animation-delay: 0.95s;
+}
+.star-5 {
+  top: 13.21%;
+  left: 15.61%;
+  animation-delay: 1.43s;
+}
+.star-6 {
+  top: 79.33%;
+  left: 10.18%;
+  animation-delay: 0.62s;
+}
+.star-7 {
+  top: 56.46%;
+  left: 16.9%;
+  animation-delay: 0.2s;
+}
+.star-8 {
+  top: 85.22%;
+  left: 20.98%;
+  animation-delay: 1.68s;
+}
+.star-9 {
+  top: 5.21%;
+  left: 65.37%;
+  animation-delay: 1.64s;
+}
+.star-10 {
+  top: 98.53%;
+  left: 12%;
+  animation-delay: 1.72s;
+}
+.star-11 {
+  top: 65.95%;
+  left: 52.05%;
+  animation-delay: 1.87s;
+}
+.star-12 {
+  top: 69.3%;
+  left: 89.81%;
+  animation-delay: 0.77s;
+}
+.star-13 {
+  top: 91.9%;
+  left: 24.94%;
+  animation-delay: 0.42s;
+}
+.star-14 {
+  top: 95.47%;
+  left: 8.93%;
+  animation-delay: 0.28s;
+}
+.star-15 {
+  top: 37%;
+  left: 58.25%;
+  animation-delay: 0.15s;
+}
+.star-16 {
+  top: 83.11%;
+  left: 69.86%;
+  animation-delay: 0.37s;
+}
+.star-17 {
+  top: 54.54%;
+  left: 24.47%;
+  animation-delay: 1.61s;
+}
+.star-18 {
+  top: 12.56%;
+  left: 44.47%;
+  animation-delay: 1.53s;
+}
+.star-19 {
+  top: 59.12%;
+  left: 99.87%;
+  animation-delay: 1.93s;
+}
+.star-20 {
+  top: 76.08%;
+  left: 24.55%;
+  animation-delay: 0.6s;
+}
+.star-21 {
+  top: 82.4%;
+  left: 82.05%;
+  animation-delay: 1.59s;
+}
+.star-22 {
+  top: 82.07%;
+  left: 0.69%;
+  animation-delay: 1.24s;
+}
+.star-23 {
+  top: 93.89%;
+  left: 36.21%;
+  animation-delay: 1.68s;
+}
+.star-24 {
+  top: 38.25%;
+  left: 9.12%;
+  animation-delay: 0s;
+}
+.star-25 {
+  top: 30.64%;
+  left: 28.46%;
+  animation-delay: 0.73s;
+}
+.star-26 {
+  top: 77.1%;
+  left: 29.52%;
+  animation-delay: 1.9s;
+}
+.star-27 {
+  top: 37.04%;
+  left: 60.16%;
+  animation-delay: 0.44s;
+}
+.star-28 {
+  top: 40.04%;
+  left: 7.76%;
+  animation-delay: 0.44s;
+}
+.star-29 {
+  top: 30.33%;
+  left: 76.4%;
+  animation-delay: 1.06s;
+}
+.star-30 {
+  top: 33.9%;
+  left: 7.41%;
+  animation-delay: 0.38s;
+}
 
 .clouds div {
   position: absolute;
-  width: 100px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  width: 250px;
+  height: 110px;
+  background-image: url("/src/assets/cloud.svg"); /* SVG 파일 경로 */
+  background-repeat: no-repeat;
+  background-size: contain; /* SVG 크기를 컨테이너에 맞게 조정 */
+  background-position: center; /* SVG를 컨테이너 중앙에 위치 */
   animation: float 6s infinite ease-in-out;
 }
 
-.cloud-1 { top: 15%; left: 10%; animation-delay: 0s; }
-.cloud-2 { top: 45%; right: 15%; animation-delay: 2s; }
-.cloud-3 { bottom: 20%; left: 30%; animation-delay: 4s; }
+.cloud-1 {
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+}
+.cloud-2 {
+  top: 45%;
+  right: 15%;
+  animation-delay: 2s;
+}
+.cloud-3 {
+  bottom: 20%;
+  left: 30%;
+  animation-delay: 4s;
+}
+
+.laptop iframe {
+  border: none;
+  border-radius: 5px;
+}
+
+.canvas-container {
+  width: 100vw; /* 브라우저 전체 너비 */
+  height: 100vh; /* 브라우저 전체 높이 */
+  margin: 0; /* 여백 제거 */
+  padding: 0; /* 패딩 제거 */
+  display: flex; /* 필요한 경우 중앙 정렬을 위한 Flexbox */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+}
