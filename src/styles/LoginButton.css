@@ -1,0 +1,72 @@
+.login-button {
+  scale: 1;
+  display: block;
+  cursor: pointer;
+  color: black;
+  margin: 0 auto;
+  padding: 16px 48px;
+  border-radius: 9999px;
+  width: 140px;
+  white-space: nowrap;
+  position: absolute;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 3px;
+  isolation: isolate;
+  margin-top: 20px;
+}
+
+.login-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 100%;
+  opacity: 0;
+  background: linear-gradient(
+    115deg,
+  rgb(186, 126, 244),
+  rgb(209, 138, 230),
+  rgb(244,157,206),
+  rgb(192,175,226),
+  rgb(150, 188, 245),
+  rgb(192,175,226),
+  rgb(244,157,206),
+  rgb(209, 138, 230),
+  rgb(186, 126, 244)
+  );
+  background-size: 25% 100%;
+  animation: an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop
+    0.75s linear infinite;
+  animation-play-state: paused;
+  translate: -5% 0%;
+  transition: translate 0.25s ease-out, opacity 0.175s ease-out;
+}
+
+.login-button:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+  transition-duration: 0.75s;
+  translate: 0% 0%;
+}
+
+@keyframes an-at-keyframe-css-at-rule-that-translates-via-the-transform-property-the-background-by-negative-25-percent-of-its-width-so-that-it-gives-a-nice-border-animation_-We-use-the-translate-property-to-have-a-nice-transition-so-it_s-not-a-jerk-of-a-start-or-stop {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+.login-button span {
+  position: relative;
+  display: block;
+  padding: 1rem 1.5rem;
+  font-size: 18px;
+  background: #fff;
+  border-radius: 30px;
+  height: 100%;
+  text-align: center;
+}

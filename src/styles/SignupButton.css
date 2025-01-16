@@ -1,0 +1,98 @@
+/* 버튼 스타일 */
+.signup-button {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2rem; /* Tailwind의 px-12 py-4 */
+  font-size: 1.25rem; /* Tailwind의 text-xl */
+  font-weight: 600; /* Tailwind의 font-semibold */
+  color: white; /* Tailwind의 text-white */
+  background-color: rgba(0, 0, 0, 0.9); /* Tailwind의 bg-black/90 */
+  border-radius: 9999px; /* Tailwind의 rounded-full */
+  text-align: center;
+  overflow: hidden; /* 내부 내용이 버튼을 벗어나지 않도록 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Tailwind의 transition-all */
+}
+
+.signup-button span {
+  position: relative;
+  z-index: 2; /* aurora보다 위에 텍스트 표시 */
+  color: white; /* 텍스트 색상 유지 */
+}
+
+.signup-button:hover {
+  transform: scale(1.05); /* Tailwind의 hover:scale-105 */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Tailwind의 hover:shadow-lg */
+}
+
+/* 텍스트에 aurora 효과 */
+.signup-button .aurora {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* 텍스트와 겹치게 설정 */
+  pointer-events: none; /* 클릭 방지 */
+  mix-blend-mode: overlay; /* 텍스트와 색상이 섞이도록 설정 */
+}
+
+.signup-button .aurora__item {
+  position: absolute;
+  width: 200%; /* 텍스트 크기에 맞춰 확장 */
+  height: 200%;
+  background-color: var(--clr-1);
+  border-radius: 50%; /* 원형 효과 */
+  filter: blur(var(--blur));
+  animation: aurora-border 6s ease-in-out infinite,
+    aurora-1 12s ease-in-out infinite alternate;
+  animation-play-state: paused; /* 기본 정지 상태 */
+}
+
+.signup-button .aurora__item:nth-of-type(1) {
+  top: -50%;
+  left: -50%;
+  background-color: var(--clr-1);
+}
+
+.signup-button .aurora__item:nth-of-type(2) {
+  top: -50%;
+  right: -50%;
+  background-color: var(--clr-2);
+}
+
+.signup-button .aurora__item:nth-of-type(3) {
+  bottom: -50%;
+  left: -50%;
+  background-color: var(--clr-3);
+}
+
+.signup-button .aurora__item:nth-of-type(4) {
+  bottom: -50%;
+  right: -50%;
+  background-color: var(--clr-4);
+}
+
+/* 호버 시 aurora 활성화 */
+.signup-button:hover .aurora__item {
+  animation-play-state: running;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes aurora-border {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    transform: translateY(-20%) translateX(-20%);
+  }
+}
+
+/* 색상 변수 */
+:root {
+  --clr-1: rgba(79, 207, 112, 0.8);
+  --clr-2: rgba(250, 214, 72, 0.8);
+  --clr-3: rgba(167, 103, 229, 0.8);
+  --clr-4: rgba(18, 188, 254, 0.8);
+  --blur: 50px; /* 오로라 효과의 블러 값 */
+}
