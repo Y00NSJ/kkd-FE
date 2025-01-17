@@ -14,7 +14,7 @@ body:
     attributes:
       label: 📋 할일
       description: 구현 to-do
-      placeholder: | 
+      placeholder: |
       "- [ ]"를 앞에 적으면 체크리스트가 됩니다
       "- [x]"를 적으면 완료 항목으로 표시됩니다
     validations:
